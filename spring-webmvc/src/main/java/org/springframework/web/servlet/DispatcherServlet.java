@@ -1254,6 +1254,14 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	@Nullable
 	protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		 /*
+		 	HandlerMapping本身是个接口，有两个实现类：
+		 		1. BeanNameUrlHandlerMapping（早期实现）
+		 		2. RequestMappingHandlerMapping
+			初始化的时候将这两个类都初始化（容器初始化的时候）在handlerMappings中了
+		 */
+
+		 // 遍历handlerMappings，获取Handler和Interceptor
 		if (this.handlerMappings != null) {
 			for (HandlerMapping mapping : this.handlerMappings) {
 				HandlerExecutionChain handler = mapping.getHandler(request);
