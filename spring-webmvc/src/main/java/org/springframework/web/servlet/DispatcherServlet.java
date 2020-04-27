@@ -1261,7 +1261,7 @@ public class DispatcherServlet extends FrameworkServlet {
 			初始化的时候将这两个类都初始化（容器初始化的时候）在handlerMappings中了
 		 */
 
-		 // 遍历handlerMappings，获取Handler和Interceptor
+		 // 遍历handlerMappings，获取Handler和Interceptor，即试图获取能够处理当前请求的执行链
 		if (this.handlerMappings != null) {
 			for (HandlerMapping mapping : this.handlerMappings) {
 				HandlerExecutionChain handler = mapping.getHandler(request);
@@ -1298,6 +1298,12 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @throws ServletException if no HandlerAdapter can be found for the handler. This is a fatal error.
 	 */
 	protected HandlerAdapter getHandlerAdapter(Object handler) throws ServletException {
+
+		/*
+		* 同理，HandlerAdapter有多个实现，容器初始化的时候存储在handlerAdapters中
+		* */
+
+		// 遍历各个HandlerAdapter，看哪个Adapter支持当前Handler
 		if (this.handlerAdapters != null) {
 			for (HandlerAdapter adapter : this.handlerAdapters) {
 				if (adapter.supports(handler)) {
