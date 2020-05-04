@@ -852,9 +852,12 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 
 		ServletWebRequest webRequest = new ServletWebRequest(request, response);
 		try {
+			// 获取容器中全局配置的InitBinder和当前HandlerMethod所对应的Controller中配置的InitBinder，用于进行参数的绑定
 			WebDataBinderFactory binderFactory = getDataBinderFactory(handlerMethod);
+			// 获取容器中全局配置的ModelAttribute和当前HandlerMethod所对用的Controller中配置的ModelAttribute，这些配置的方法将会在目标方法调用之前进行处理
 			ModelFactory modelFactory = getModelFactory(handlerMethod, binderFactory);
 
+			// 将handlerMethod
 			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
 			if (this.argumentResolvers != null) {
 				invocableMethod.setHandlerMethodArgumentResolvers(this.argumentResolvers);

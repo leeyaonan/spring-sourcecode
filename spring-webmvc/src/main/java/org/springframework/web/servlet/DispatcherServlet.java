@@ -311,38 +311,49 @@ public class DispatcherServlet extends FrameworkServlet {
 	/** Perform cleanup of request attributes after include request?. */
 	private boolean cleanupAfterInclude = true;
 
+	// TODO：SpringMVC九大组件
+
+	// 多部件解析器
 	/** MultipartResolver used by this servlet. */
 	@Nullable
 	private MultipartResolver multipartResolver;
 
+	// 区域化 国际化解析器
 	/** LocaleResolver used by this servlet. */
 	@Nullable
 	private LocaleResolver localeResolver;
 
+	// 主题解析器
 	/** ThemeResolver used by this servlet. */
 	@Nullable
 	private ThemeResolver themeResolver;
 
+	// 处理器映射器组件
 	/** List of HandlerMappings used by this servlet. */
 	@Nullable
 	private List<HandlerMapping> handlerMappings;
 
+	// 处理器适配器组件
 	/** List of HandlerAdapters used by this servlet. */
 	@Nullable
 	private List<HandlerAdapter> handlerAdapters;
 
+	// 异常解析器组件
 	/** List of HandlerExceptionResolvers used by this servlet. */
 	@Nullable
 	private List<HandlerExceptionResolver> handlerExceptionResolvers;
 
+	// 默认视图名转换器组件
 	/** RequestToViewNameTranslator used by this servlet. */
 	@Nullable
 	private RequestToViewNameTranslator viewNameTranslator;
 
+	// flash属性管理组件
 	/** FlashMapManager used by this servlet. */
 	@Nullable
 	private FlashMapManager flashMapManager;
 
+	// 视图解析器
 	/** List of ViewResolvers used by this servlet. */
 	@Nullable
 	private List<ViewResolver> viewResolvers;
@@ -490,6 +501,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	/**
 	 * This implementation calls {@link #initStrategies}.
 	 */
+	// TODO:SpringMVC在这里完成初始化策略
 	@Override
 	protected void onRefresh(ApplicationContext context) {
 		initStrategies(context);
@@ -500,14 +512,23 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * <p>May be overridden in subclasses in order to initialize further strategy objects.
 	 */
 	protected void initStrategies(ApplicationContext context) {
+		// 多文件上传的组件
 		initMultipartResolver(context);
+		// 初始化本地语言环境
 		initLocaleResolver(context);
+		// 初始化模板处理器
 		initThemeResolver(context);
+		// 初始化HandlerMapping
 		initHandlerMappings(context);
+		// 初始化参数适配器
 		initHandlerAdapters(context);
+		// 初始化异常拦截器
 		initHandlerExceptionResolvers(context);
+		// 初始化视图预处理器
 		initRequestToViewNameTranslator(context);
+		// 初始化视图转换器
 		initViewResolvers(context);
+		// 初始化FlashMap管理器
 		initFlashMapManager(context);
 	}
 
